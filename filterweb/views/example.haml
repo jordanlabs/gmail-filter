@@ -1,0 +1,39 @@
+%pre
+  = preserve do
+    :escaped
+      ---
+      # example yaml filter definition
+      engineer_name: First Last
+      engineer_email: email@address.com
+
+      templates:
+       - name: mailingLists
+         hasTheWord: list:%s
+         label: Lists
+         shouldArchive: true
+       - name: adminAlerts
+         hasTheWord: (from:{monitoring-01.ocio monitoring-02.ocio} %1$s) | from:%1$s
+         label: Alerts/Admin
+
+      filters:
+      # mailing lists
+       - useTemplate: mailingLists
+         values:
+          - puppet-users.googlegroups.com
+          - checkmk-en.lists.mathias-kettner.de
+          - foreman-users.googlegroups.com
+          - puppet-dev.googlegroups.com
+          - mcollective-users.googlegroups.com
+          - tsung-users.lists.process-one.net
+       - hasTheWord: {please pls} (ignore alarms) | (resume monitoring)
+         label: Alerts
+         shouldArchive: true
+      # alerts for systems that we're primary or secondary. 
+      # filters that reference the label must go after.
+       - useTemplate: adminAlerts
+         values: 
+          - servers
+          - are
+          - pulled
+          - from
+          - addhost

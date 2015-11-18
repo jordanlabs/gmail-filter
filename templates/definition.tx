@@ -1,0 +1,41 @@
+---
+# NB: 
+# - The label must already exist in Gmail
+# - Filters can be disabled with a property of: enabled: 'false'
+engineerName: <: $engineerName :>
+engineerEmail: <: $engineerEmail :>
+
+templates:
+ adminAlerts:
+   hasTheWord: (from:{monitoring-01.ocio monitoring-02.ocio} %1$s) | from:%1$s
+   label: Alerts
+
+filters:
+# ignore calendar reminders
+ - from: calendar-notification@google.com
+   shouldArchive: 'true'
+   shouldMarkAsRead: 'true'
+   label: Alerts/PendingDelete
+# all mail related to ticketing system
+ - from: ticketing@emailaddress.com
+   to: 
+   label: Tickets
+   shouldArchive: 'true'
+   shouldNeverSpam: 'true'
+   shouldMarkAsRead: 'true'
+ - from: ticketing@emailaddress.com
+   to: <: $engineerEmail :>
+   label: Tickets
+ - hasTheWord: to:sas-l (ignore {alarm alert}) | (resume monitoring)
+   label: Alerts
+   shouldArchive: 'true'
+# alerts for systems that we're primary, secondary, etc. 
+# filters that reference the label must go after.
+ - useTemplate: adminAlerts
+   values: 
+   : for $servers -> $host {
+    - <: $host :>
+   : }
+ - hasTheWord: to:{root rhns monit} | from:{cfengine munin SCOM-Alert "Cron Daemon" root logwatch user rhn-satellite} -label:Alerts
+   label: Alerts/NonAdmin
+   shouldArchive: 'true'

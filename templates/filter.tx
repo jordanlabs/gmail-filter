@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:apps='http://schemas.google.com/apps/2006'>
+    <title>Mail Filters</title>
+    <id>tag:mail.google.com,2008:filters:<: $timeNow :></id>
+    <updated><: $timeStamp :></updated>
+    <author>
+        <name><: $engineerName :></name>
+        <email><: $engineerEmail :></email>
+    </author>
+    : for $filters -> $entry { 
+    <entry>
+        <category term='filter'></category>
+        <title>Mail Filter</title>
+        <id>tag:mail.google.com,2008:filter:<: $entry.timeNow :></id>
+        <updated><: $entry.timeStamp :></updated>
+        <content></content>
+	: for $entry.properties.kv() -> $property {	
+        <apps:property name='<: $property.key :>' value='<: $property.value :>'/>
+        : }
+    </entry>
+    : }
+</feed>

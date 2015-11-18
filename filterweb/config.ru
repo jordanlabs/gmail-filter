@@ -1,0 +1,2 @@
+require './filterweb'
+run FilterWeb

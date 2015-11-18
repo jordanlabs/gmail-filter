@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:apps='http://schemas.google.com/apps/2006'>
+    <title>Mail Filters</title>
+    <id>tag:mail.google.com,2008:filters:1390215288609</id>
+    <updated>2014-08-20T22:59:04Z</updated>
+    <author>
+        <name>Joshua Jordan</name>
+        <email>joshua.jordan@monash.edu</email>
+    </author>
+    <entry>
+        <category term='filter'></category>
+        <title>Mail Filter</title>
+        <id>tag:mail.google.com,2008:filter:1390215288609</id>
+        <updated>2014-08-20T22:59:04Z</updated>
+        <content></content>
+        <apps:property name='from' value='mailing-list@emailaddress.com'/>
+        <apps:property name='label' value='Mailing-Lists'/>
+        <apps:property name='shouldMarkAsRead' value='true'/>
+        <apps:property name='shouldArchive' value='true'/>
+    </entry>
+</feed>

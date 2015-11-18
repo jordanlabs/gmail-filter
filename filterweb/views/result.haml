@@ -1,0 +1,13 @@
+%h3 Results
+- if @successful_generation
+  .alert.alert-success{ :role => "alert" }
+    %strong Awesome!
+    Download your Gmail filters file 
+    %a{ :href => "/download/filters" }here
+- else
+  .alert.alert-danger{ :role => "alert" }
+    %strong Oh snap!
+    Check out the errors below to see what went wrong
+  %h4 Output
+  %pre.pre-scrollable
+    = @output

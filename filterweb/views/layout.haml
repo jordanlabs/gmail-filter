@@ -1,0 +1,28 @@
+!!! 5
+%html
+  %head
+    %meta{ :charset => "utf-8" }
+    %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1" }
+    %meta{ :name => "description", :content => "Create a Gmail filter xml file for import" }
+    %meta{ :name => "author", :content => "Joshua Jordan" }
+    %title Gmail Filter Generator
+    %link{ :rel => "stylesheet", :href => "/css/bootstrap.min.css", :type => "text/css" }
+    %link{ :rel => "stylesheet", :href => "/css/signin.css", :type => "text/css" }
+%body
+  .navbar.navbar-inverse.navbar-fixed-top{ :role => "navigation" }
+    .container
+      .navbar-header
+        %button.navbar-toggle.collapsed(type = "button" data-toggle = "collapse" data-target = ".navbar-collapse") 
+          %span.sr-only Toggle navigation
+          %span.icon-bar
+        %a.navbar-brand{ :href => "/" }Gmail Filter Generator
+      .collapse.navbar-collapse
+        %ul.nav.navbar-nav
+          %li.active
+            %a{ :href => "/" }Home
+          %li.active
+            %a{ :href => "/logout" }Logout
+  .container
+    = yield
+  %script{ :src => "/js/jquery.min.js" } 
+  %script{ :src => "/js/bootstrap.min.js" }
